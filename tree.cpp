@@ -138,45 +138,6 @@ void SHPC(vertex *inVertexArray, vertex *outVertexArray, int inLength, int *outL
 	}
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /////////////////////////////////////////////////////////////////////
 //tessalation/////
 //////////////////////////////////////////////////////////////////
@@ -501,7 +462,7 @@ void PipeLine( float *vp, int vpts )
     /* Don't forget to initialize the ponter! */
     TM = &TransformationMatrix[0];
     // Clip tree  	
-	SHPC(vp, vp, vpts, vpts, );
+	
 
 
     // Translate to origin  
