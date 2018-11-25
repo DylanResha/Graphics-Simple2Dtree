@@ -38,7 +38,6 @@ struct triangle{
 
 //vectors to hold my lists in
 vector<vertex> coords;
-vector<vertex> cCoords;
 vector<line> lineList;
 vector<triangle> triList;
 
@@ -50,9 +49,6 @@ float SCALE = 1.0;
 float rp = 1.0;
 float tX = -WINDOW_MAX/2;
 float tY = -WINDOW_MAX/2;
-
-
-
 
 void vmatm (int SIZE, float *pA, float *pB)
 
@@ -188,7 +184,7 @@ bool polyIntersect(){
 		//cout<<"size of line list"<<lineList.size()<<endl;
 	   int j = (i+1);	
 	 for(int k=0; k<lineList.size()-3; k++){
-		//cout<<"in poly intersect loop"<<endl;
+		cout<<"in poly intersect loop"<<endl;
 		if(checkIntersect(i,j%lineList.size())){return true;}
 		j++;
  	  }
@@ -374,19 +370,6 @@ triList.push_back(lastTri);
 
 
 
-
-void clip(){
- cCoords = coords;
-
- 
-    for(int i = 0; i<cCoords.size();i++){
-	if(cCoords.at(i).x<100){cCoords.at(i).x=100;}
-	if(cCoords.at(i).y<100){cCoords.at(i).y=100;}
-	if(cCoords.at(i).x>900){cCoords.at(i).x=900;}
-	if(cCoords.at(i).y>900){cCoords.at(i).y=900;}
-	
-}
-}
 
 
 
@@ -630,21 +613,21 @@ void toVertex ( float *apts, struct vertex *vp, int pts )
 
 }
 
-void drawTree()
+void drawTree(int points)
 {
 line temp;
 glBegin(GL_LINES);
-    for (int i=0;i<cCoords.size()-1;i++){
-        glVertex2f( cCoords.at(i).x, cCoords.at(i).y );
-	glVertex2f( cCoords.at(i+1).x, cCoords.at(i+1).y);
-	temp.a = cCoords.at(i);
-	temp.b = cCoords.at(i+1);
+    for (int i=0;i<points-6;i++){
+        glVertex2f( coords.at(i).x, coords.at(i).y );
+	glVertex2f( coords.at(i+1).x, coords.at(i+1).y);
+	temp.a = coords.at(i);
+	temp.b = coords.at(i+1);
 	lineList.push_back(temp);
 	}
- 	glVertex2f( cCoords.back().x, cCoords.back().y );
-	glVertex2f( cCoords.front().x, cCoords.front().y);
-	temp.a = cCoords.back();
-	temp.b = cCoords.front();
+ 	glVertex2f( coords.back().x, coords.back().y );
+	glVertex2f( coords.front().x, coords.front().y);
+	temp.a = coords.back();
+	temp.b = coords.front();
 	lineList.push_back(temp);
 
     glEnd();
@@ -697,14 +680,13 @@ void display( void )
     /* Now start the process of rotating */
     PipeLine( apts, inPoints );
     toVertex( apts, invp, inPoints );
-	
+
     glColor3f(1.0, 0.0, 0.0);
 
     /* Draw Scaled and Rotated Arrow */
     //drawTrunk( invp, 6 );
     //drawLeaves(invp, inPoints);
-    clip();
-    drawTree();
+    drawTree(inPoints);
     glutSwapBuffers();
 
  }
