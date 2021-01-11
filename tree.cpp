@@ -183,10 +183,10 @@ bool polyIntersect(){
 
 //simple double for loop to check all lines in the list
 	for(int i=0; i<lineList.size()-1; i++){
-		//cout<<"size of line list"<<lineList.size()<<endl;
+		cout<<"size of line list"<<lineList.size()<<endl;
 	   int j = (i+1);	
 	 for(int k=0; k<lineList.size()-3; k++){
-		cout<<"in poly intersect loop"<<endl;
+		//cout<<"in poly intersect loop. k="<<k<<" size of list="<<lineList.size()<<"j="<<j<<endl;
 		if(checkIntersect(i,j%lineList.size())){return true;}
 		j++;
  	  }
@@ -335,12 +335,12 @@ for(int i=0; i<coords.size(); i++){
 		
 		}//end if polyIntersect
 		else if(!polyIntersect()){
-		   //glBegin(GL_LINES);
-	 	    //glVertex2i(lineList.back().a.x,lineList.back().a.y);
-		    //glVertex2i(lineList.back().b.x,lineList.back().b.y);
-	           //glEnd();
-		   //glFlush();
-			// glutSwapBuffers();
+		   glBegin(GL_LINES);
+	 	    glVertex2i(lineList.back().a.x,lineList.back().a.y);
+		    glVertex2i(lineList.back().b.x,lineList.back().b.y);
+	           glEnd();
+		   glFlush();
+			 glutSwapBuffers();
 		   		    
 		   //add triangle
 		   triangle tempTri;
